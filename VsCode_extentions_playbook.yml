@@ -1,0 +1,15 @@
+- name: Install VScode extentions
+  hosts: IOTLP
+  tasks:
+   - name: install VScode extensions
+     command: >
+      code --install-extension {{ item }}
+     loop:
+      - ms-vscode.cpptools
+      - mitaki28.vscode-clang
+      - austin.code-gnu-global
+      - redhat.java
+      - ms-python.python
+      - vscode-icons-team.vscode-icons
+      - yzhang.markdown-all-in-one
+      - goessner.mdmath

@@ -1,0 +1,18 @@
+- name: Vscode
+  hosts: IOTLP
+  become: true
+  tasks:
+   - name: Install prerequisites
+     apt:
+      name:
+       - vim
+       - tmux
+       - build-essential
+       - cmake
+       - cmake-data
+       - curl
+       - git
+       - minicom
+       - mc
+       - htop
+       state: latest

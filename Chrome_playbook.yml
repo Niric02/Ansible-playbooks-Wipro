@@ -1,0 +1,23 @@
+- name: Chrome
+  hosts: IOTLP
+  become: true
+  tasks:
+   - name: Add Google's official GPG key
+     apt_key:
+      url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+      state: present
+
+   - name: Add the Google Chrome repository
+     apt_repository:
+      repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+      state: present
+      filename: google-chrome
+
+   - name: Update the package list
+     apt:
+      update_cache: yes
+
+   - name: Install Google Chrome
+     apt:
+      name: google-chrome-stable
+      state: present

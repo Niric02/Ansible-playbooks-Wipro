@@ -1,0 +1,17 @@
+- name: Arduino
+  hosts: IOTLP
+  become: true
+  tasks:
+   - name: Download Arduino IDE
+     get_url:
+      url: "https://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz"
+      dest: "/home/hslu/Downloads/arduino-1.8.5-linux64.tar.xz"
+
+   - name: Extract the tar file
+     unarchive:
+      src: "/home/hslu/Downloads/arduino-1.8.5-linux64.tar.xz"
+      dest: "/home/programs/"
+      remote_src: yes
+
+   - name: Run the install script
+     command: "/home/hslu/programs/arduino-1.8.5/install.sh"

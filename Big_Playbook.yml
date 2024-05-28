@@ -1,0 +1,27 @@
+- name: Big boy
+  hosts: all
+  become: yes
+  tasks:
+   - name: Execute Packages Play
+    include: ./Packages_playbook.yml
+  
+  - name: Execute Crome
+    include: ./Chrome_playbook.yml
+  
+  - name: Execute Java
+   include: ./Java_Playbook.yml
+  
+  - name: Execute Visual Studio Code
+   include: ./Vscode_playbook.yml
+  
+  - name: Execute Visual Studio Code Extentions
+   include: ./VsCode_extentions_playbook.yml
+  
+  - name: Execute Atom
+   include: ./Atom_playbook.yml
+  
+  - name: Execute Arduino
+   include: ./Arduino_playbook.yml
+  
+  - name: Execute ESP32
+   include: ./ESP32_playbook.yml

@@ -1,0 +1,6 @@
+IOTLP:
+  hosts:
+    Hostname:
+      ansible_host: hostname
+      ansible_user: user
+      ansible_become_pass: sudoPassword

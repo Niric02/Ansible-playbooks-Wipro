@@ -1,0 +1,34 @@
+- name: Update Clean
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update OS and tools
+      apt:
+        update_cache: yes
+        upgrade: 'yes'
+
+    - name: Clean specific folders
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "~/work"
+        - "~/exercises"
+
+    - name: Delete all SSH keys
+      file:
+        path: "~/.ssh/ssh_known"
+        state: absent
+
+    - name: Clean up unusual folders and files
+      file:
+        path: "/path/to/unusual/folder/or/file"
+        state: absent
+
+    - name: Delete additional files in Downloads and Pictures
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "~/Downloads/*"
+        - "~/Pictures/*"

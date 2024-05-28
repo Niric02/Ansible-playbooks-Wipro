@@ -1,0 +1,32 @@
+#cloud-config
+autoinstall:
+  # version is an Autoinstall required field.
+  version: 1
+
+  interactive-sections:
+    - identity
+    - network
+
+  identity:
+    realname: user
+    username: user
+    # A password hash is needed. `mkpasswd --method=SHA-512` can help.
+    # mkpasswd can be found in the package 'whois'
+    password: $crypted_pass
+    hostname: LP_HOSTNAME
+
+  keyboard:
+   layout: ch
+
+  ssh:
+    install-server: yes
+    authorized-keys:
+      - ssh key of master device
+    allow-pw: yes
+
+  # Command to be able to use SSH connection over avahi hostname resolution
+  late-commands:
+    - curtin in-target --target=/target -- cp /usr/share/doc/avahi-daemon/examples/sftp-ssh.service /etc/avahi/services 
+    
+
+   

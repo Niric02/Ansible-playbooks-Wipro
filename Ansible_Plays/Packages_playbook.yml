@@ -15,4 +15,4 @@
        - minicom
        - mc
        - htop
-       state: latest
+      state: latest

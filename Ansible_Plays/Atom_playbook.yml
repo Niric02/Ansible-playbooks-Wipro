@@ -6,15 +6,6 @@
      apt:
       update_cache: yes
       upgrade: yes
-
-   - name: Add Atom Repository
-     apt_repository:
-      repo: ppa:webupd8team/atom
-      state: present
-      filename: atom
       
    - name: Install Atom Editor
-     apt:
-      name: atom
-      state: present
-      update_cache: yes
+     command: snap install atom --classic

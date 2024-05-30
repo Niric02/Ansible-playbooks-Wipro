@@ -2,26 +2,29 @@
   hosts: all
   become: yes
   tasks:
-   - name: Execute Packages Play
-    include: ./Packages_playbook.yml
+   - name: Debug
+     debug:
+       msg: big play
+- name: Execute Packages Play
+  import_playbook: Packages_playbook.yml
   
-  - name: Execute Crome
-    include: ./Chrome_playbook.yml
+- name: Execute Crome
+  import_playbook: Chrome_playbook.yml
   
-  - name: Execute Java
-   include: ./Java_Playbook.yml
+- name: Execute Java
+  import_playbook: Java_Playbook.yml
   
-  - name: Execute Visual Studio Code
-   include: ./Vscode_playbook.yml
+- name: Execute Visual Studio Code
+  import_playbook: Vscode_playbook.yml
   
-  - name: Execute Visual Studio Code Extentions
-   include: ./VsCode_extentions_playbook.yml
+- name: Execute Visual Studio Code Extentions
+  import_playbook: VsCode_extentions_playbook.yml
   
-  - name: Execute Atom
-   include: ./Atom_playbook.yml
+- name: Execute Atom
+  import_playbook: Atom_playbook.yml
   
-  - name: Execute Arduino
-   include: ./Arduino_playbook.yml
+- name: Execute Arduino
+  import_playbook: Arduino_playbook.yml
   
-  - name: Execute ESP32
-   include: ./ESP32_playbook.yml
+- name: Execute ESP32
+  import_playbook: ESP32_playbook.yml

@@ -1,32 +1,16 @@
-- name: Big boy
+- name: Java
   hosts: all
   become: yes
   tasks:
-   - name: Add Java PPA
-     apt_repository:
-      repo: 'ppa:webupd8team/java'
-      state: present
 
    - name: Update apt cache
      apt:
       update_cache: yes
 
-   - name: Install Oracle Java 8
-     apt:
-      name: oracle-java8-installer
-      state: present
-     register: result
-     ignore_errors: yes
-
-   - name: Accept Java license
-     command: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-     when: result|failed
-
    - name: Reinstall Oracle Java 8
      apt:
-      name: oracle-java8-installer
+      name: openjdk-8-jdk
       state: present
-     when: result|failed
 
    - name: Check Java version
      command: java -version

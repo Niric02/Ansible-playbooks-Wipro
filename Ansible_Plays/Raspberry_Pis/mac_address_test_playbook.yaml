@@ -1,0 +1,27 @@
+---
+- name: Retrieve MAC Address and Hostname
+  hosts: iotrp
+  gather_facts: yes
+  become: yes
+  tasks:
+
+    - name: Retrieve MAC address of wlan0 interface
+      set_fact:
+        mac_address: "{{ ansible_facts['wlan0']['macaddress'] }}"
+
+    - name: Retrieve hostname
+      set_fact:
+        hostname: "{{ ansible_facts['hostname'] }}"
+
+    - name: Log hostname and MAC address cleanly
+      debug:
+        msg: "{{ hostname }} - {{ mac_address }}"
+
+    # Example of using the retrieved MAC address and hostname
+    - name: Create a file with MAC address and hostname
+      copy:
+        content: |
+          Hostname: {{ hostname }}
+          MAC Address: {{ mac_address }}
+        dest: /tmp/host_info.txt
+      when: mac_address is defined and hostname is defined

@@ -1,0 +1,38 @@
+---
+- name: Configure WiFi on Raspberry Pi
+  hosts: iotrpeee
+  become: yes
+  tasks:
+    - name: Ensure wpa_supplicant is installed
+      apt:
+        name: wpasupplicant
+        state: present
+
+    - name: Backup the current wpa_supplicant.conf file
+      copy:
+        src: /etc/wpa_supplicant/wpa_supplicant.conf
+        dest: /etc/wpa_supplicant/wpa_supplicant.conf.bak
+        remote_src: yes
+        backup: yes
+
+    - name: Configure WiFi settings
+      copy:
+        content: |
+          ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+          update_config=1
+
+          network={
+            ssid="EEE"
+            scan_ssid=1
+            key_mgmt=WPA-EAP
+            eap=PEAP
+            identity="username"
+            password="password"
+          }
+        dest: /etc/wpa_supplicant/wpa_supplicant.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Rebooting the Device
+      reboot:

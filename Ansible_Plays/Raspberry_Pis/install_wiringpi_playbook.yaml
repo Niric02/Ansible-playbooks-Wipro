@@ -1,0 +1,26 @@
+---
+- name: Install WiringPi
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure git is installed
+      apt:
+        name: git
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Clone WiringPi repository
+      git:
+        repo: 'https://github.com/WiringPi/WiringPi.git'
+        dest: '/opt/wiringpi'
+        update: yes
+
+    - name: Pull latest changes from origin
+      command: git pull origin
+      args:
+        chdir: /opt/wiringpi
+
+    - name: Build WiringPi
+      command: ./build
+      args:
+        chdir: /opt/wiringpi

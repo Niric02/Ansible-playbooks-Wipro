@@ -1,0 +1,27 @@
+iotrpeee:
+  hosts:
+    eee-03861:
+      ansible_host: hostname
+      ansible_user: username
+      ansible_become_pass: "password"
+
+iotrp4:
+  hosts:
+    raspberrypi44:
+      ansible_host: hostname
+      ansible_user: username
+      ansible_become_pass: "password"
+
+iotrpz:
+  hosts:
+    raspberrypizerow10:
+      ansible_host: hostname
+      ansible_user: username
+      ansible_become_pass: "password"
+
+
+iotrp:
+  children:
+    iotrpeee:
+    iotrp4:
+    iotrpz:
